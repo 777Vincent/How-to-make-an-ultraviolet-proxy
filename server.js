@@ -12,6 +12,7 @@ import Groq from "groq-sdk";
 import dotenv from "dotenv";
 import schedule from "node-schedule";
 import { WebSocketServer } from "ws";
+import fetch from "node-fetch"; // Ensure this import is added
 
 dotenv.config();
 
@@ -62,7 +63,7 @@ app.get("/daily-neko", (req, res) => {
   }
 });
 
-// Fetch daily neko initially and then schedule to update every minute
+// Fetch daily neko initially and then schedule to update every day at 6 AM
 fetchDailyNeko();
 schedule.scheduleJob("0 6 * * *", fetchDailyNeko);
 
