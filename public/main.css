@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+*::selection {
+  background: white;
+  color: black;
+  text-shadow: 0 0 15px black;
+  border-radius: 10%;
+}
+.hero {
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+#time {
+  color: white;
+  font-family: "Roboto Mono";
+  letter-spacing: 0.5vw;
+  padding-bottom: 35px;
+  border-bottom: 2px solid white;
+}
+#mmddyy {
+  font-size: 1.8rem;
+  font-family: "Roboto Mono";
+  color: white;
+  padding: 40px;
+  text-shadow: 0 0 5px white;
+}
+#clock {
+  font-size: 10vw;
+  font-weight: lighter;
+  font-family: "Azeret Mono";
+  word-spacing: 10px;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-shadow: 0 0 15px white;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+@media (max-width: 992px) {
+  #mmddyy {
+    padding: 0px;
+  }
+}
+@media (max-width: 750px) {
+  #clock {
+    font-size: 12.2vw;
+  }
+}
+@media (max-width: 500px) {
+  #clock {
+    white-space: nowrap;
+    padding-bottom: 15px;
+  }
+}
+#nekoImage {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 40vw;
+  max-height: 35vh;
+  top: 80%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="shortcut icon" href="./images/home.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body
+    style="
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(
+        315deg,
+        rgb(0, 0, 0) -30%,
+        rgb(22, 22, 33) 100%
+      );
+    "
+  >
+    <section class="hero">
+      <h1 data-aos="fade-up" data-aos-duration="1500" id="clock"></h1>
+      <section
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-delay="1500"
+        id="mmddyy"
+      ></section>
+    </section>
+    <div
+      style="
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin-top: 10px;
+      "
+    >
+      <img id="nekoImage" src="" alt="Neko" />
+      <p
+        style="
+          margin-top: 5px;
+          font-size: 1.2em;
+          font-weight: bold;
+          color: #ff66b2;
+          top: 60%;
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        "
+      >
+        🐱 Your Daily Neko! 💖
+      </p>
+    </div>
+    <script>
+      function currentTime() {
+        let date = new Date();
+        let mmm = date.toLocaleString("default", { month: "short" });
+        let yyy = date.getFullYear();
+        let ddd = date.getDate();
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getUTCSeconds();
+        let session = "AM";
+
+        if (hh == 0) {
+          hh = 12;
+        }
+        if (hh > 12) {
+          hh = hh - 12;
+          session = "PM";
+        }
+
+        hh = hh < 10 ? "0" + hh : hh;
+        mm = mm < 10 ? "0" + mm : mm;
+        ss = ss < 10 ? "0" + ss : ss;
+
+        document.getElementById("mmddyy").innerText = `${mmm}, ${ddd}, ${yyy}`;
+        document.getElementById(
+          "clock"
+        ).innerText = `${hh}:${mm}:${ss} ${session}`;
+
+        setTimeout(currentTime, 1000);
+      }
+      currentTime();
+
+      const socket = new WebSocket("ws://" + window.location.host + "/ws");
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.action === "updateNeko") {
+          document.getElementById("nekoImage").src = data.link;
+        }
+      };
+
+      async function getDailyNeko() {
+        try {
+          const response = await fetch("/daily-neko");
+          const data = await response.json();
+          document.getElementById("nekoImage").src = data.link;
+        } catch (error) {
+          console.error("Error fetching daily Neko image:", error);
+        }
+      }
+
+      getDailyNeko();
+    </script>
+  </body>
+</html>

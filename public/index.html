@@ -1,30 +1,198 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="/uv/uv.bundle.js"></script>
-        <script src="/uv/uv.config.js"></script>
-        <script src="/baremux/index.js"></script>
+  <head>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/baremux/index.js"></script>
 
-        <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", async () => {
-                await navigator.serviceWorker.register("/uv/sw.js");
-            });
-        }
-        </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+          await navigator.serviceWorker.register("/uv/sw.js");
+        });
+      }
+    </script>
 
-        <link rel="stylesheet" href="example.css">
-    </head>
-    <body>
-        <input type="text" id="urlInput" placeholder="Enter URL here">
-        <button id="searchButton">Search Text</button>
-        <select id="switcher">
-            <option value="">--Please Choose an Option--</option>
-            <option value="epoxy">Epoxy</option>
-            <option value="bare">Bare</option>
-        </select>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <ul class="menu">
+          <li class="item share">
+            <div>
+              <i class="uil uil-share"></i>
+              <span>Share</span>
+            </div>
+            <i class="uil uil-angle-right"></i>
+            <ul class="share-menu">
+              <li class="item">
+                <i class="uil uil-twitter-alt"></i>
+                <span>Twitter</span>
+              </li>
+            </ul>
+          </li>
+          <li class="item copy-link">
+            <i class="uil uil-link-alt"></i>
+            <span>Get Link</span>
+          </li>
+          <li class="item delete">
+            <i class="uil uil-trash-alt"></i>
+            <span>Delete</span>
+          </li>
+        </ul>
+        <div class="setting">
+          <li class="item">
+            <i class="uil uil-setting"></i>
+            <span>Settings</span>
+          </li>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" link="1">
+        <img src="./images/home.svg" alt="tab icon" class="tab-icon" link="1" />
+        Home
+      </button>
+      <button class="addTab" aria-selected="true">+</button>
+    </div>
+    <div id="navContainer">
+      <button
+        class="backButton"
+        style="
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 1vw;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <img src="./images/arrow.svg" style="width: 1vw; height: 1.5vh" />
+      </button>
+      <button
+        class="homeButton"
+        onclick="navigateToHome()"
+        style="
+          background: none;
+          border: none;
+          cursor: pointer;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0.3vw;
+        "
+      >
+        <div
+          class="padding"
+          style="padding-left: 0.65vw; padding-right: 0.65vw"
+        >
+          <img src="./images/home.svg" style="width: 1vw; height: 1.5vh" />
+        </div>
+      </button>
+      <button
+        class="forwardButton"
+        style="
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 1vw;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <img
+          src="./images/arrow.svg"
+          style="width: 1vw; height: 1.5vh; rotate: 180deg"
+        />
+      </button>
+    </div>
+    <div style="margin: 0; padding: 0; position: relative">
+      <input type="text" id="webSearch" placeholder="" />
+      <img
+        src="./images/google.png"
+        alt=""
+        style="
+          height: 2.5vh;
+          position: relative;
+          left: 10.25vw;
+          top: -3.25vh;
+          cursor: pointer;
+        "
+        class="searchIcon"
+        id="searchIcon"
+      />
+      <div id="dropdownMenu" class="dropdown-content">
+        <div class="dropdown-item" id="google">
+          <img src="./images/google.png" alt="Google" style="height: 2.5vh" />
+          <span>Google</span>
+        </div>
+        <div class="dropdown-item" id="duckduckgo">
+          <img
+            src="./images/duckduckgo.png"
+            alt="DuckDuckGo"
+            style="height: 2.5vh"
+          />
+          <span>DuckDuckGo</span>
+        </div>
+        <div class="dropdown-item" id="bing">
+          <img src="./images/bing.png" alt="Bing" style="height: 2.5vh" />
+          <span>Bing</span>
+        </div>
+        <div class="dropdown-item" id="yahoo">
+          <img src="./images/yahoo.png" alt="Yahoo" style="height: 2.5vh" />
+          <span>Yahoo</span>
+        </div>
+        <div class="dropdown-item" id="startpage">
+          <img
+            src="./images/startpage.png"
+            alt="Startpage"
+            style="height: 2.5vh"
+          />
+          <span>Startpage</span>
+        </div>
+        <div class="dropdown-item" id="yandex">
+          <img src="./images/yandex.png" alt="Yandex" style="height: 2.5vh" />
+          <span>Yandex</span>
+        </div>
+      </div>
+    </div>
+    <button id="searchButton">Search</button>
+    <!--select id="switcher">
+      <option value="">--Please Choose an Option--</option>
+      <option value="epoxy">Epoxy</option>
+      <option value="bare">Bare</option>
+    </select-->
 
-        <iframe id="iframeWindow" class="iframeWindow"></iframe>
-    </body>
-    <script src="example.js"></script>
+    <iframe
+      id="iframeWindow"
+      class="iframeWindow"
+      src="main.html"
+      link="1"
+    ></iframe>
+  </body>
+  <script src="script.js" type="module"></script>
+
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/toastify-js"
+  ></script>
 </html>
