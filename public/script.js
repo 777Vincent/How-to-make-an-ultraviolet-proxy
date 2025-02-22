@@ -335,9 +335,9 @@ function attachIframeClickListener(iframe) {
         activeTab.appendChild(newTextNode);
       }
       const favicon = activeTab.querySelector(`img[link="${link}"]`);
-      favicon.src = `https://favicone.com/${new URL(
-        activeIframe.getAttribute("origin")
-      ).origin.replace("https://", "")}`;
+      favicon.src = `https://favicone.com/${activeIframe
+        .getAttribute("origin")
+        .origin.replace("https://", "")}`;
     }
   });
 }
