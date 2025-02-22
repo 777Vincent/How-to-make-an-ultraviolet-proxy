@@ -12,7 +12,7 @@ import Groq from "groq-sdk";
 import dotenv from "dotenv";
 import schedule from "node-schedule";
 import { WebSocketServer } from "ws";
-import fetch from "node-fetch"; // Ensure this import is added
+import fs from "fs";
 
 dotenv.config();
 
@@ -63,7 +63,7 @@ app.get("/daily-neko", (req, res) => {
   }
 });
 
-// Fetch daily neko initially and then schedule to update every day at 6 AM
+// Fetch daily neko initially and then schedule to update every minute
 fetchDailyNeko();
 schedule.scheduleJob("0 6 * * *", fetchDailyNeko);
 
@@ -80,6 +80,7 @@ app.use((req, res) => {
 
 // Create HTTP server using Express
 const httpServer = createServer(app);
+
 const wss = new WebSocketServer({ noServer: true }); // Use noServer mode to prevent conflicts
 
 wss.on("connection", (ws) => {
