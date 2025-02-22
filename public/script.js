@@ -168,6 +168,8 @@ function navigateToHome() {
     console.error("Iframe not found.");
   }
 }
+const homeButton = document.querySelector(".homeButton");
+homeButton.addEventListener("click", navigateToHome);
 
 const tabsContainer = document.querySelector(".tabs");
 tabsContainer.addEventListener("wheel", (event) => {
