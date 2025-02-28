@@ -59,7 +59,7 @@ async function checkURL(url) {
     return false;
   }
 }
-let searchUrl = "https://www.google.com/search?q="; // will be dynamic soon, for duckduckgo as kindKid wanted
+let searchUrl = "https://www.google.com/search?q=";
 document.getElementById("searchButton").onclick = async function (event) {
   event.preventDefault();
 
